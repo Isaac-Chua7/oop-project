@@ -6,7 +6,7 @@ struct Coordinate{
     int row;
     int col;    
     int getRow(GameCharacter* gc);
-    int getCol();
+    int getCol(GameCharacter* gc);
 };
 
 class GameCharacter{
@@ -22,6 +22,5 @@ class GameCharacter{
         virtual void takeDamage(int dmg);
         virtual void update() = 0;
 };
-
 
 #endif
