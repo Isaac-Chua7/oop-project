@@ -5,8 +5,10 @@ struct Coordinate{
     public:
     int row;
     int col;    
-    int getRow(GameCharacter* gc);
-    int getCol(GameCharacter* gc);
+    int getRow();
+    void setRow(int r);
+    int getCol();
+    void setCol(int c);
 };
 
 class GameCharacter{
@@ -18,7 +20,8 @@ class GameCharacter{
         GameCharacter();
         GameCharacter(int hp);
         virtual ~GameCharacter();
-        int getHealth(GameCharacter* gc);
+        int getHealth();
+        void setHealth(int health);
         virtual void takeDamage(int dmg);
         virtual void update() = 0;
 };
