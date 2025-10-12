@@ -1,8 +1,16 @@
 #include "GameCharacter.h"
 
-GameCharacter::GameCharacter() { health = 0; };
+GameCharacter::GameCharacter() {
+  health = 0;
+  position.row = 0;
+  position.col = 0;
+}
 
-GameCharacter::GameCharacter(int hp) { health = hp; }
+GameCharacter::GameCharacter(int r, int c, int hp) {
+  health = hp;
+  position.row = r;
+  position.col = c;
+}
 
 GameCharacter::~GameCharacter() {};
 
@@ -18,4 +26,4 @@ int Coordinate::getCol() { return col; }
 
 void Coordinate::setRow(int r) { row = r; };
 
-void Coordinate::setCol(int c) { col = c;};
+void Coordinate::setCol(int c) { col = c; };

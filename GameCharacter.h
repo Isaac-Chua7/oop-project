@@ -18,7 +18,7 @@ class GameCharacter{
     
     public:
         GameCharacter();
-        GameCharacter(int hp);
+        GameCharacter(int r, int c, int hp);
         virtual ~GameCharacter();
         int getHealth();
         void setHealth(int health);
