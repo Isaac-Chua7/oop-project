@@ -1,15 +1,7 @@
 #ifndef GAMECHARACTER_H
 #define GAMECHARACTER_H
 
-struct Coordinate{
-    public:
-    int row;
-    int col;    
-    int getRow();
-    void setRow(int r);
-    int getCol();
-    void setCol(int c);
-};
+#include"Coordinate.h"
 
 class GameCharacter{
     protected:
@@ -23,7 +15,9 @@ class GameCharacter{
         int getHealth();
         void setHealth(int health);
         virtual void takeDamage(int dmg);
-        virtual void update() = 0;
+        //virtual void update() = 0; commented out to try instantiate
+        Coordinate getPosition();
+
 };
 
 #endif
