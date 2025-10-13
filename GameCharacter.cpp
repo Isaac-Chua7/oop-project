@@ -21,3 +21,5 @@ void GameCharacter::setHealth(int health) { this->health = health; };
 void GameCharacter::takeDamage(int dmg) { health = health - dmg; }
 
 Coordinate GameCharacter::getPosition() { return position; }
+
+string GameCharacter::getName() { return name; }
