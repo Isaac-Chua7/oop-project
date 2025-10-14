@@ -1,10 +1,10 @@
 #include "Attacker3.h"
 #include <iostream>
 
-Attacker3::Attacker3(int hp, int spd, int dmg, int threshold, int boost) : Attacker(hp, spd, dmg), lowHPThreshold(threshold), speedBoost(boost) {}
+Attacker3::Attacker3(int r, int c, int hp, int spd, int dmg, int threshold, int boost) : Attacker(r, c, hp, spd, dmg), lowHPThreshold(threshold), speedBoost(boost) {}
 
 void Attacker3::update() {
-    if (hp <= lowHPThreshold) {
+    if (health <= lowHPThreshold) {
         speed += speedBoost;
         std::cout << "[Attacker3] Low health! Speed increased by "
                   << speedBoost << " to " << speed

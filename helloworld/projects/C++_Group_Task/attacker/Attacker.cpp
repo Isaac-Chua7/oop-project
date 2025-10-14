@@ -1,12 +1,16 @@
 #include "Attacker.h"
-#include "defender.h"
+#include "GameCharacter.h"
+#include "Coordinate.h"
+// #include "Defender.h"
 
-Attacker::Attacker(int hp, int spd, int dmg) : hp(hp), speed(spd), damage(dmg) {}
+// Attacker::Attacker(int hp, int spd, int dmg) : hp(hp), speed(spd), damage(dmg) {}
+
+Attacker::Attacker(int r, int c, int hp, int spd, int dmg) : GameCharacter(r, c, hp), speed(spd), damage(dmg) {}
 
 void Attacker::takeDamage(int dmg) {
-    hp -= dmg;
+    hp -= dmg; // this uses inherit health
     if (hp < 0) {
-        hp - 0;
+        hp = 0;
     }
 }
 
@@ -18,11 +22,22 @@ int Attacker::getDamage() {
     return damage;
 }
 
-void Attacker::attacker(Defender* p) {
-    if (!p) {
-        return;
-    }
+// void Attacker::attacker(Defender* p) {
+//     if (!p) {
+//         return;
+//     }
 
-    p->takeDamage(damage);
+//     p->takeDamage(damage);
     
+// }
+
+// move function by 1 col
+void Attacker::move(int deltaCol) {
+    position.col += deltaCol;
 }
+
+GameCharacter::GameCharacter(int r, int c, int hp) {
+    health = hp;
+    position.row = r;
+    position.col = c;
+  }
