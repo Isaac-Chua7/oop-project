@@ -10,10 +10,10 @@ class GameCharacter{
     protected:
         Coordinate position;
         int health;
+        string name;
         
     
     public:
-        string name;
         GameCharacter();
         GameCharacter(int r, int c, int hp);
         virtual ~GameCharacter();
