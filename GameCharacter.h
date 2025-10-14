@@ -23,6 +23,7 @@ class GameCharacter{
         //virtual void update() = 0; commented out to try instantiate
         Coordinate getPosition();
         string getName();
+        void setName(string name);
 
 };
 

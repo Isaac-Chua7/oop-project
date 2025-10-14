@@ -20,9 +20,9 @@ int main() {
     // You can either add a setName() function to GameCharacter,
     // or temporarily set 'name' public in GameCharacter for this test.
     // For now, we’ll assume name can be directly assigned.
-    plant1->name = "🌱";
-    zombie1->name = "🧟";
-    plant2->name = "🌻";
+    plant1->setName("🌱");
+    zombie1->setName("🧟");
+    plant2->setName("🌻");
 
     // Add them to the GameManager’s vector
     gm.getGameCharacters().push_back(plant1);
