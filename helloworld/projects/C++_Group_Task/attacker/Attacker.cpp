@@ -12,7 +12,7 @@ Attacker::Attacker() {
     // This shows that the attacker will be randomly placed at any row on the right side
     srand(static_cast<unsigned>(time(nullptr)));
 
-    position.row = rand() % 4;
+    position.row = rand() % 5;
     position.col = 9;
 }
 

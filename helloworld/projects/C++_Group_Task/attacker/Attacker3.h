@@ -9,7 +9,7 @@ private:
     int speedBoost;
 
 public:
-    Attacker3(int r, int c, int hp, int spd, int dmg, int threshold, int boost);
+    Attacker3();
     void update() override;
 };
 
