@@ -8,7 +8,7 @@ protected:
     int armour;
 
 public:
-    Attacker2(int r, int c, int hp, int spd, int dmg, int armourValue);
+    Attacker2();
     int reduceDamage(int dmg);
     int getArmour() const { return armour; }
     void setArmour(int a) { armour = a; }
