@@ -2,7 +2,7 @@
 #include <iostream>
 #include <algorithm>
 
-Attacker2::Attacker2(int hp, int spd, int dmg, int armourValue) : Attacker(hp, spd, dmg), armour(armourValue) {}
+Attacker2::Attacker2(int r, int c, int hp, int spd, int dmg, int armourValue) : Attacker(r, c, hp, spd, dmg), armour(armourValue) {}
 
 int Attacker2::reduceDamage(int dmg) {
     int damageTaken = std::max(0, dmg - armour);

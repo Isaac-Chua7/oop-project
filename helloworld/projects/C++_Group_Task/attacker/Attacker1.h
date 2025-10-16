@@ -5,7 +5,7 @@
 
 class Attacker1 : public Attacker {
 public:
-    Attacker1(int hp, int spd, int dmg);
+    Attacker1(int r, int c, int hp, int spd, int dmg);
     void update() override;
 };
 
