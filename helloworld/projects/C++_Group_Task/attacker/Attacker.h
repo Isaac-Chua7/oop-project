@@ -12,19 +12,11 @@ protected:
     int damage;
 
 public:
-    // Attacker(int hp, int spd, int dmg);
-    Attacker(int r, int c, int hp, int spd, int dmg);
-
-    // GameCharacter();
-    // GameCharacter(int r, int c, int hp);
-    // virtual ~GameCharacter();
-
-
+    Attacker(int maxRow, int maxCol, int hp, int spd, int dmg);
     void takeDamage(int dmg) override;
     void move(int deltaCol);
     int getSpeed();
     int getDamage();
-    // void attacker(Defender* p);
     virtual void update() = 0;
 
 };

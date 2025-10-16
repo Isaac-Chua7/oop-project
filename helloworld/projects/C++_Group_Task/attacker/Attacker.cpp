@@ -1,11 +1,20 @@
 #include "Attacker.h"
 #include "GameCharacter.h"
 #include "Coordinate.h"
+#include <cstdlib>
+#include <ctime>
 // #include "Defender.h"
 
 // Attacker::Attacker(int hp, int spd, int dmg) : hp(hp), speed(spd), damage(dmg) {}
 
-Attacker::Attacker(int r, int c, int hp, int spd, int dmg) : GameCharacter(r, c, hp), speed(spd), damage(dmg) {}
+Attacker::Attacker(int maxRow, int maxCol, int hp, int spd, int dmg) : GameCharacter(0, 0, hp), speed(spd), damage(dmg) {
+
+    // This shows that the attacker will be randomly placed at any row on the right side
+    srand(static_cast<unsigned>(time(nullptr)));
+
+    position.row = rand() % maxRow;
+    position.col = maxCol - 1;
+}
 
 void Attacker::takeDamage(int dmg) {
     hp -= dmg; // this uses inherit health
@@ -21,15 +30,6 @@ int Attacker::getSpeed() {
 int Attacker::getDamage() {
     return damage;
 }
-
-// void Attacker::attacker(Defender* p) {
-//     if (!p) {
-//         return;
-//     }
-
-//     p->takeDamage(damage);
-    
-// }
 
 // move function by 1 col
 void Attacker::move(int deltaCol) {
