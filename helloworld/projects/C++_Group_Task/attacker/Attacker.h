@@ -7,14 +7,13 @@
 
 class Attacker : public GameCharacter {
 protected:
-    int hp;
     int speed;
     int damage;
 
 public:
-    Attacker(int maxRow, int maxCol, int hp, int spd, int dmg);
-    void takeDamage(int dmg) override;
-    void move(int deltaCol);
+    Attacker();
+    void takeDamage(int dmg);
+    void move();
     int getSpeed();
     int getDamage();
     virtual void update() = 0;
