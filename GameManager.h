@@ -5,13 +5,17 @@
 #include<iostream>
 #include<vector>
 #include<cstdlib>
+#include"Attacker.h"
 
 using namespace std;
 
 class GameManager{
     protected:
-        vector<GameCharacter*> gameCharacters; 
+        int money;
+        int income;
         int roundNumber;
+        vector<GameCharacter*> gameCharacters; 
+        int numberOfSpawns;
     
     public:
         GameManager();
@@ -21,6 +25,15 @@ class GameManager{
         void clearTerminal();
         void printBoard();
         void nextTurn();
+        int promptPlayer();
+        //void createPlant(Defender d);
+        void addAttacker();
+        void addDefender1(int row, int col);
+        void addDefender2(int row, int col);
+        void addDefender3(int row, int col);
+        int getRoundNumber();
+
+
 };
 
 #endif
