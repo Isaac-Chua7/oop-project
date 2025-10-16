@@ -7,7 +7,7 @@ Attacker2::Attacker2() {
     damage = 1;
     speed = 1;
     position.col = 9;
-    name = "🧟‍♀️";
+    name = "🐗";
     armour = 3;
 
     if (health < 0) {
@@ -23,9 +23,4 @@ void Attacker2::update() {
               << std::endl;
 
     armour += 1;
-}
-
-// move function by 1 col
-void Attacker::move() {
-    position.col--;
 }

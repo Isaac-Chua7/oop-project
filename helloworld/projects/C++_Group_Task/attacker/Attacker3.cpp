@@ -6,7 +6,7 @@ Attacker3::Attacker3() {
     damage = 1;
     speed = 1;
     position.col = 9;
-    name = "🧟‍♂️";
+    name = "🐤";
     speedBoost = 2;
 
     if (health < 0) {
@@ -26,9 +26,4 @@ void Attacker3::update() {
               << " damage = " << damage
               << std::endl;
     }
-}
-
-// move function by 1 col
-void Attacker::move() {
-    position.col--;
 }
