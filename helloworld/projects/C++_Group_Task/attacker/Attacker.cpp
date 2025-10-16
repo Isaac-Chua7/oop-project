@@ -7,19 +7,19 @@
 
 // Attacker::Attacker(int hp, int spd, int dmg) : hp(hp), speed(spd), damage(dmg) {}
 
-Attacker::Attacker(int maxRow, int maxCol, int hp, int spd, int dmg) : GameCharacter(0, 0, hp), speed(spd), damage(dmg) {
+Attacker::Attacker() {
 
     // This shows that the attacker will be randomly placed at any row on the right side
     srand(static_cast<unsigned>(time(nullptr)));
 
-    position.row = rand() % maxRow;
-    position.col = maxCol - 1;
+    position.row = rand() % 4;
+    position.col = 9;
 }
 
 void Attacker::takeDamage(int dmg) {
-    hp -= dmg; // this uses inherit health
-    if (hp < 0) {
-        hp = 0;
+    health -= dmg; // this uses inherit health
+    if (health < 0) {
+        health = 0;
     }
 }
 
@@ -32,12 +32,12 @@ int Attacker::getDamage() {
 }
 
 // move function by 1 col
-void Attacker::move(int deltaCol) {
-    position.col += deltaCol;
+void Attacker::move() {
+    position.col--;
 }
 
-GameCharacter::GameCharacter(int r, int c, int hp) {
-    health = hp;
-    position.row = r;
-    position.col = c;
-  }
+// GameCharacter::GameCharacter(int r, int c, int hp) {
+//     health = hp;
+//     position.row = r;
+//     position.col = c;
+//   }
