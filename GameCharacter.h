@@ -24,6 +24,7 @@ class GameCharacter{
         Coordinate getPosition();
         string getName();
         void setName(string name);
+        virtual void move() = 0; 
 
 };
 

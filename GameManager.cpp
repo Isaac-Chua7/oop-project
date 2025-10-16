@@ -81,10 +81,10 @@ void GameManager::nextTurn() {
     roundNumber++;
 
     for(int i = 0; i < gameCharacters.size(); i++){
-      //gameCharacters[i]->move(); move function not yet implemented
+      gameCharacters[i]->move();
     }
 
-    for (int i = 0; i < roundNumber; i++) {
+    for (int i = 0; i < roundNumber % 3; i++) {
       addAttacker();
     }
 
@@ -151,15 +151,17 @@ void GameManager::addAttacker() { // will this work or will it has scope issues?
       gameCharacters.push_back(new Attacker1);  // all attackers just have a default constructor
       break;
     case 1:
-      //gameCharacters.push_back(new Attacker2);
+      gameCharacters.push_back(new Attacker2);
       break;
     case 2:
-      //gameCharacters.push_back(new Attacker3);
+      gameCharacters.push_back(new Attacker3);
       break;
     default:
       gameCharacters.push_back(new Attacker1);
       break;
   }
+
+  numberOfSpawns++;
 }
 
 
