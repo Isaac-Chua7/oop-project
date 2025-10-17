@@ -15,17 +15,19 @@ void introduction() {
   }
 
   if (isNewPlayer == "Y") {
-    cout << "This is a turn based tower defence game where the objective is to\n"
-            "stop the attackers 🏃 from reaching the end of the row they spawn\n"
-            "in you can do this by placing defenders down to stop them. You\n"
-            "get 3 choices 🌱, 🌻, 🌰 the plant will slowly damage defenders\n"
-            "by shooting projectiles, the sunflower will grant you more cash\n"
-            "each turn to buy defenders and the nut will provide a temporary\n"
-            "blockade hindering the attackers progress\n";
+    cout
+        << "This is a turn based tower defence game where the objective is to\n"
+           "stop the attackers 🏃 from reaching the end of the row they spawn\n"
+           "in you can do this by placing defenders down to stop them. You\n"
+           "get 3 choices 🌱, 🌻, 🌰 the plant will slowly damage defenders\n"
+           "by shooting projectiles, the sunflower will grant you more cash\n"
+           "each turn to buy defenders and the nut will provide a temporary\n"
+           "blockade hindering the attackers progress\n";
   }
 }
 
 int main() {
+  srand(time(NULL));
   GameManager gm;
 
   introduction();
@@ -49,15 +51,13 @@ int main() {
     gm.printBoard();
   }
 
-    gm.promptPlayer();
+  gm.promptPlayer();
 
-    while(gm.isGameOver() == false){
-        gm.nextTurn();
-    }
+  while (gm.isGameOver() == false) {
+    gm.nextTurn();
+  }
 
-    cout << "YOU SURVIVED " << gm.getRoundNumber() <<" ROUNDS";
-
+  cout << "YOU SURVIVED " << gm.getRoundNumber() << " ROUNDS";
 
   return 0;
 }
-

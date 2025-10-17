@@ -24,8 +24,3 @@ void Attacker2::update() {
 
     armour += 1;
 }
-
-// // move function by 1 col
-// void Attacker::move() {
-//     position.col--;
-// }

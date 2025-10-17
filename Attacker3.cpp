@@ -27,8 +27,3 @@ void Attacker3::update() {
               << std::endl;
     }
 }
-
-// // move function by 1 col
-// void Attacker::move() {
-//     position.col--;
-// }

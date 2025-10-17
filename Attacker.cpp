@@ -10,7 +10,6 @@
 Attacker::Attacker() {
 
     // This shows that the attacker will be randomly placed at any row on the right side
-
     position.row = rand() % 5;
     position.col = 9;
 }
@@ -35,8 +34,3 @@ void Attacker::move() {
     position.col--;
 }
 
-// GameCharacter::GameCharacter(int r, int c, int hp) {
-//     health = hp;
-//     position.row = r;
-//     position.col = c;
-//   }
