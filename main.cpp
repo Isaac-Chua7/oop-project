@@ -15,12 +15,12 @@ void introduction() {
   }
 
   if (isNewPlayer == "Y") {
-    cout << "This is a turn based tower defence game where the objective is to "
-            "stop the attackers 🏃 from reaching the end of the row they spawn "
-            "in \n you can do this by placing defenders down to stop them. You "
-            "get 3 choices 🌱, 🌻, 🌰 the plant will slowly damage defenders "
-            "by shooting projectiles, the sunflower will grant you more cash "
-            "each turn to buy defenders and the nut will provide a temporary "
+    cout << "This is a turn based tower defence game where the objective is to\n"
+            "stop the attackers 🏃 from reaching the end of the row they spawn\n"
+            "in you can do this by placing defenders down to stop them. You\n"
+            "get 3 choices 🌱, 🌻, 🌰 the plant will slowly damage defenders\n"
+            "by shooting projectiles, the sunflower will grant you more cash\n"
+            "each turn to buy defenders and the nut will provide a temporary\n"
             "blockade hindering the attackers progress\n";
   }
 }

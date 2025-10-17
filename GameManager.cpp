@@ -131,7 +131,7 @@ int GameManager::promptPlayer() {
       // and col to add to vector.
     }
     return 0;
-  }
+    }
   return 0;
 }
 /*
