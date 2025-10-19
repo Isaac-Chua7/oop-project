@@ -14,24 +14,24 @@ class GameManager{
         int money;
         int income;
         int roundNumber;
-        vector<GameCharacter*> gameCharacters; 
-        int numberOfSpawns;
+        vector<GameCharacter*> gameAttackers; 
+        vector<GameCharacter*> gameDefenders; 
     
     public:
         GameManager();
-        vector<GameCharacter*>& getGameCharacters();
+        vector<GameCharacter*>& getGameAttackers();
+        vector<GameCharacter*>& getGameDefenders();
         ~GameManager();
         bool isGameOver();
         void clearTerminal();
         void printBoard();
         void nextTurn();
         int promptPlayer();
-        //void createPlant(Defender d);
         void addAttacker();
-        void addDefender1(int row, int col);
-        void addDefender2(int row, int col);
-        void addDefender3(int row, int col);
+        void addDefender(int attackerType, int row, int col);
         int getRoundNumber();
+        void removeDeadCharacters();
+        void introduction();
 
 
 };

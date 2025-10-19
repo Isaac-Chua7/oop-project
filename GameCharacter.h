@@ -19,7 +19,7 @@ class GameCharacter{
         virtual ~GameCharacter();
         int getHealth();
         void setHealth(int health);
-        virtual void takeDamage(int dmg);
+        void takeDamage(int dmg);
         //virtual void update() = 0; commented out to try instantiate
         Coordinate getPosition();
         string getName();

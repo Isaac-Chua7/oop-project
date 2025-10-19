@@ -4,14 +4,14 @@
 #include "Attacker1.h"
 #include "Attacker2.h"
 #include "Attacker3.h"
-// #include "Defender.h"
-// #include "Defender1.h"
-// #include "Defender2.h"
-// #include "Defender3.h"
+#include "Defender.h"
+#include "Defender1.h"
+#include "Defender2.h"
+#include "Defender3.h"
 
 // remove commented rows 7-10, 191 - 193 , 201-221
 
-#include <ctime>
+//#include <ctime>
 
 GameManager::GameManager() {  // default constructor, no parameterised
                               // constructor is needed
@@ -39,6 +39,7 @@ GameManager::~GameManager() {
   for (int i = 0; i < gameDefenders.size(); i++) {
     delete gameDefenders[i];
   }
+  cout << "deconstructor run";
 };
 
 // checks the col number of all attackers to see if any have made it to the end
@@ -46,8 +47,8 @@ GameManager::~GameManager() {
 bool GameManager::isGameOver() {
   for (int i = 0; i < gameAttackers.size(); i++) {
     if (gameAttackers[i]->getPosition().getCol() ==
-        -1) {  // set to negative one as attackers can walk here but plants
-               // can't be placed.
+        0) {  // set to negative one as attackers can walk here but plants
+              // can't be placed.
       clearTerminal();
       cout << "Gameover" << endl;
       return true;
@@ -124,7 +125,7 @@ void GameManager::nextTurn() {
   money = money + income;
   roundNumber++;
 
-  int numberOfSpawns = rand() % roundNumber;
+  int numberOfSpawns = rand() % (roundNumber / 2);
 
   for (int i = 0; i < gameAttackers.size(); i++) {
     gameAttackers[i]->move();
@@ -187,37 +188,40 @@ int GameManager::promptPlayer() {
     }
   }
 
-  // addDefender(
-  //     decision2, decisionRow,
-  //     decisionCol);  // call the addDefender function with the type of plant and
-                     // where the user wants to place it has parameters
+  // call the addDefender function with the type of plant and
+  // where the user wants to place it has parameters
+  addDefender(decision2, decisionRow, decisionCol);  
+
 
   return 0;
 }
 
 // this function adds the desired defender to the board at the desired position
 // after ensuring the player has sufficient funds
-// void GameManager::addDefender(int attackerType, int r, int c) {
-//   if (attackerType == 1) {
-//     if (money > 100) {
-//       gameDefenders.push_back(new Defender1(r, c));
-//       money = money - 100;
-//     } else {
-//       cout << "Failed to purchase plant, insufficient funds\n";
-//     }
-//   } else if (attackerType == 2) {
-//     if (money > 100) {
-//       gameDefenders.push_back(new Defender2(r, c));
-//       income = income + 50;
-//       money = money - 50;
-//     } else {
-//       cout << "Failed to purchase plant, insufficient funds\n";
-//     }
-//   } else if (attackerType == 3) {
-//     gameDefenders.push_back(new Defender3(r, c));
-//     money = money - 25;
-//   }
-// }
+void GameManager::addDefender(int attackerType, int r, int c) {
+  if (attackerType == 1) {
+    if (money >= 100) {
+      gameDefenders.push_back(new Defender1(r, c));
+      money = money - 100;
+    } else {
+      cout << "Failed to purchase plant, insufficient funds\n";
+    }
+  } else if (attackerType == 2) {
+    if (money >= 50) {
+      gameDefenders.push_back(new Defender2(r, c));
+      income = income + 50;
+      money = money - 50;
+    } else {
+      cout << "Failed to purchase plant, insufficient funds\n";
+    }
+  } else if (attackerType == 3) {
+    if (money >= 25)
+    gameDefenders.push_back(new Defender3(r, c));
+    money = money - 25;
+  } else {
+    cout << "Failed to pruchase plant, insufficient funds\n";
+  }
+}
 
 // this function adds a random attacker to the board, the row they spawn in is
 // also randomly decided (this is done in the attacker constructor)
@@ -242,3 +246,56 @@ void GameManager::addAttacker() {
 }
 
 int GameManager::getRoundNumber() { return roundNumber; }
+
+// this function runs each turn to check whether a game character has 0 health,
+// if so it removes them from the game.
+void GameManager::removeDeadCharacters() {
+  // removing dead attackers
+  for (int i = 0; i < gameAttackers.size();) {
+    if (gameAttackers[i]->getHealth() <= 0) {
+      delete gameAttackers[i];
+      gameAttackers.erase(gameAttackers.begin() + i);
+    } else {
+      i++;  // i in only incremented when nothing is erased
+    }
+  }
+
+  // removing dead attackers
+  for (int i = 0; i < gameDefenders.size();) {
+    if (gameDefenders[i]->getHealth() <= 0) {
+      delete gameDefenders[i];
+      gameDefenders.erase(gameDefenders.begin() + i);
+    } else {
+      i++;  // i in only incremented when nothing is erased
+    }
+  }
+}
+
+// this function is called when the code is compiled and introduces the player
+// to the game
+void GameManager::introduction() {
+  string isNewPlayer = "";
+
+  cout << "Are you new to this game? (Y/N)\n";
+  cin >> isNewPlayer;
+
+  isNewPlayer[0] = toupper(isNewPlayer[0]);
+
+  while (isNewPlayer != "Y" && isNewPlayer != "N") {
+    cout << "Invalid input\nAre you new to this game? (Y/N)\n";
+    cin >> isNewPlayer;
+    isNewPlayer[0] = toupper(isNewPlayer[0]);
+  }
+
+  if (isNewPlayer == "Y") {
+    cout
+        << "This is a turn based tower defence game where the objective is to\n"
+           "stop the attackers 🦆, 🐗, 🐤 from reaching the end of the row "
+           "they spawn\n"
+           "in you can do this by placing defenders down to stop them. You\n"
+           "get 3 choices 🌱, 🌻, 🌰 the plant will slowly damage defenders\n"
+           "by shooting projectiles, the sunflower will grant you more cash\n"
+           "each turn to buy defenders and the nut will provide a temporary\n"
+           "blockade hindering the attackers progress\n";
+  }
+}
