@@ -21,6 +21,8 @@ class Defender1 : public Defender {
   void move();
 
   vector<Projectile*>& getProjectiles();
+
+  ~Defender1();
 };
 
 #endif

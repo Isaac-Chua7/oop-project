@@ -20,3 +20,9 @@ void Defender1::move() {
 }
 
 vector<Projectile*>& Defender1::getProjectiles() { return projectiles; }
+
+Defender1::~Defender1(){
+    for(int i = 0; i < projectiles.size(); i++){
+        delete projectiles[i];
+    }
+}

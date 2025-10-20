@@ -32,6 +32,7 @@ GameManager::~GameManager() {
   for (int i = 0; i < gameAttackers.size(); i++) {
     delete gameAttackers[i];
   }
+  
   for (int i = 0; i < gameDefenders.size(); i++) {
     delete gameDefenders[i];
   }
