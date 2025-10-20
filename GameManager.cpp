@@ -12,7 +12,7 @@
 GameManager::GameManager() {  // default constructor, no parameterised
                               // constructor is needed
   this->money = 100;
-  this->income = 100;
+  this->income = 25;
   this->roundNumber = 1;
 };
 
