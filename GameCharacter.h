@@ -3,14 +3,18 @@
 
 #include"Coordinate.h"
 #include<string>
+#include<vector>
 
 using namespace std;
+
+class Projectile;
 
 class GameCharacter{
     protected:
         Coordinate position;
         int health;
         string name;
+        string type;
         
     
     public:
@@ -20,11 +24,12 @@ class GameCharacter{
         int getHealth();
         void setHealth(int health);
         void takeDamage(int dmg);
-        //virtual void update() = 0; commented out to try instantiate
         Coordinate getPosition();
         string getName();
         void setName(string name);
         virtual void move() = 0; 
+        string getType();
+        virtual vector<Projectile*>& getProjectiles();
 
 };
 

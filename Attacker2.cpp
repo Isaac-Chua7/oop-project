@@ -9,10 +9,7 @@ Attacker2::Attacker2() {
     position.col = 9;
     name = "🐗";
     armour = 3;
-
-    if (health < 0) {
-        health = 0;
-    }
+    type = "Attacker2";
 }
 
 void Attacker2::update() {

@@ -30,3 +30,10 @@ Coordinate GameCharacter::getPosition() { return position; }
 string GameCharacter::getName() { return name; }
 
 void GameCharacter::setName(string name) { this->name = name; }
+
+string GameCharacter::getType() { return type; }
+
+vector<Projectile*>& GameCharacter::getProjectiles() {
+  static vector<Projectile*> empty;
+  return empty;
+};

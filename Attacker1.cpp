@@ -7,10 +7,7 @@ Attacker1::Attacker1() {
     speed = 1;
     position.col = 9;
     name = "🦆";
-
-    if (health < 0) {
-        health = 0;
-    }
+    type = "Attacker1";
 }
 
 void Attacker1::update() {

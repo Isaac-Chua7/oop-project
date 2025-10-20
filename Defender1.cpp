@@ -7,11 +7,16 @@ using namespace std;
 
 Defender1 ::Defender1(int row, int col) : Defender(row, col) {
   health = 7;
-  damage = 1;
-  fireRate = 1;
+  willFire = 1;
   name = "🌱";
+  type = "Defender1";
 }
 
-int Defender1::getDamage() { return damage; }
+void Defender1::move() {
+  if (willFire % 2 == 0) {
+    projectiles.push_back(new Projectile(position.row, position.col + 1));
+  }
+  willFire++;
+}
 
-int Defender1::getFireRate() { return fireRate; }
+vector<Projectile*>& Defender1::getProjectiles() { return projectiles; }

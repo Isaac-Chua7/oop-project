@@ -9,10 +9,6 @@
 #include "Defender2.h"
 #include "Defender3.h"
 
-// remove commented rows 7-10, 191 - 193 , 201-221
-
-//#include <ctime>
-
 GameManager::GameManager() {  // default constructor, no parameterised
                               // constructor is needed
   this->money = 100;
@@ -39,7 +35,6 @@ GameManager::~GameManager() {
   for (int i = 0; i < gameDefenders.size(); i++) {
     delete gameDefenders[i];
   }
-  cout << "deconstructor run";
 };
 
 // checks the col number of all attackers to see if any have made it to the end
@@ -108,6 +103,24 @@ void GameManager::printBoard() {
     }
   }
 
+  for (int i = 0; i < gameDefenders.size();
+       i++) {  // adding projectiles to the board
+    if (gameDefenders[i]->getType() == "Defender1" &&
+        !gameDefenders[i]->getProjectiles().empty()) {
+      vector<Projectile*> projectiles = gameDefenders[i]->getProjectiles();
+      for (int j = 0; j < projectiles.size(); j++) {
+        Coordinate pos = projectiles[j]->getPosition();
+        int r = pos.getRow();
+        int c = pos.getCol();
+
+        if (r >= 0 && r < numRows && c >= 0 && c < numCols) {
+          string name = projectiles[j]->getName();
+          board[r][c] = "[" + name + "]";
+        }
+      }
+    }
+  }
+
   cout << endl;
   // this is where the board is actually printed
   for (int r = 0; r < numRows; r++) {
@@ -134,6 +147,21 @@ void GameManager::nextTurn() {
   for (int i = 0; i < numberOfSpawns; i++) {
     addAttacker();
   }
+
+  // getting Defender1 to shoot and projectiles to move forward
+  for (int i = 0; i < gameDefenders.size(); i++) {
+    gameDefenders[i]->move();
+    if (gameDefenders[i]->getType() == "Defender1" &&
+        !gameDefenders[i]->getProjectiles().empty()) {
+      vector<Projectile*> projectiles = gameDefenders[i]->getProjectiles();
+      for (int j = 0; j < projectiles.size(); j++) {
+        projectiles[j]->move();
+      }
+    }
+  }
+
+  handleProjectileCollisions();
+  removeDeadCharacters();
 
   printBoard();
   promptPlayer();
@@ -190,8 +218,7 @@ int GameManager::promptPlayer() {
 
   // call the addDefender function with the type of plant and
   // where the user wants to place it has parameters
-  addDefender(decision2, decisionRow, decisionCol);  
-
+  addDefender(decision2, decisionRow, decisionCol);
 
   return 0;
 }
@@ -204,7 +231,7 @@ void GameManager::addDefender(int attackerType, int r, int c) {
       gameDefenders.push_back(new Defender1(r, c));
       money = money - 100;
     } else {
-      cout << "Failed to purchase plant, insufficient funds\n";
+      cout << "Failed to purchase plant, insuficient funds\n";
     }
   } else if (attackerType == 2) {
     if (money >= 50) {
@@ -215,8 +242,7 @@ void GameManager::addDefender(int attackerType, int r, int c) {
       cout << "Failed to purchase plant, insufficient funds\n";
     }
   } else if (attackerType == 3) {
-    if (money >= 25)
-    gameDefenders.push_back(new Defender3(r, c));
+    if (money >= 25) gameDefenders.push_back(new Defender3(r, c));
     money = money - 25;
   } else {
     cout << "Failed to pruchase plant, insufficient funds\n";
@@ -297,5 +323,52 @@ void GameManager::introduction() {
            "by shooting projectiles, the sunflower will grant you more cash\n"
            "each turn to buy defenders and the nut will provide a temporary\n"
            "blockade hindering the attackers progress\n";
+  }
+}
+
+// projectile collision with attackers was done by ChatGPT
+void GameManager::handleProjectileCollisions() {
+  for (size_t i = 0; i < gameDefenders.size(); ++i) {
+    // Only Defender1 has projectiles
+    auto* d1 = dynamic_cast<Defender1*>(gameDefenders[i]);
+    if (!d1) continue;
+
+    auto& projectiles = d1->getProjectiles();  // reference to real vector
+
+    // Loop over projectiles
+    for (size_t j = 0; j < projectiles.size();) {
+      Projectile* p = projectiles[j];
+      if (!p) {
+        projectiles.erase(projectiles.begin() + j);
+        continue;
+      }
+
+      Coordinate pPos = p->getPosition();
+      bool projectileRemoved = false;
+
+      // Check against all attackers
+      for (size_t k = 0; k < gameAttackers.size(); ++k) {
+        GameCharacter* a = gameAttackers[k];
+        if (!a) continue;
+
+        Coordinate aPos = a->getPosition();
+
+        // Check: same row, and same col OR 1 column ahead
+        if (pPos.getRow() == aPos.getRow() &&
+            (pPos.getCol() == aPos.getCol() ||
+             pPos.getCol() + 1 == aPos.getCol())) {
+          a->takeDamage(p->getDamage());  // attacker takes damage
+
+          // Remove projectile
+          delete p;
+          projectiles.erase(projectiles.begin() + j);
+          projectileRemoved = true;
+          break;  // no need to check other attackers
+        }
+      }
+
+      // Only increment j if projectile wasn’t erased
+      if (!projectileRemoved) ++j;
+    }
   }
 }

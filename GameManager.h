@@ -32,6 +32,7 @@ class GameManager{
         int getRoundNumber();
         void removeDeadCharacters();
         void introduction();
+        void handleProjectileCollisions();
 
 
 };

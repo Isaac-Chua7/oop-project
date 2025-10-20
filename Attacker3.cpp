@@ -8,10 +8,7 @@ Attacker3::Attacker3() {
     position.col = 9;
     name = "🐤";
     speedBoost = 2;
-
-    if (health < 0) {
-        health = 0;
-    }
+    type = "Attacker3";
 }
 
 void Attacker3::update() {

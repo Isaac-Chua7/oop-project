@@ -10,7 +10,7 @@ class Defender : public GameCharacter {
 
  public:
   Defender(int row, int col);
-  void move();
+  virtual void move();
 
   int getCost();
 
