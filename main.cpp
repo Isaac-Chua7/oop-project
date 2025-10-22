@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include <fstream>
 
 int main() {
   srand(time(NULL));
@@ -32,6 +33,15 @@ int main() {
   }
 
   cout << "YOU SURVIVED " << gm.getRoundNumber() << " ROUNDS\n";
+
+  // Create a text file
+  ofstream MyFile("Previous_Scores.txt");
+
+  // Write to the file
+  MyFile << "YOU SURVIVED " << gm.getRoundNumber() << " ROUNDS\n";
+
+  // Close the file
+  MyFile.close();
 
   return 0;
 }

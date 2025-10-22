@@ -37,3 +37,7 @@ vector<Projectile*>& GameCharacter::getProjectiles() {
   static vector<Projectile*> empty;
   return empty;
 };
+
+//when this function is overridden it will print the state of the GameCharacter
+void GameCharacter::update(){}; 
+

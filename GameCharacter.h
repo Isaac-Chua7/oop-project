@@ -30,6 +30,7 @@ class GameCharacter{
         virtual void move() = 0; 
         string getType();
         virtual vector<Projectile*>& getProjectiles();
+        virtual void update();
 
 };
 

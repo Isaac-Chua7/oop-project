@@ -66,7 +66,7 @@ void GameManager::clearTerminal() {
 void GameManager::printBoard() {
   cout << "Money: " << money << " Income: " << income
        << " Round: " << roundNumber << endl;
-  cout << "🌱: 100   🌻: 50   🌰: 25" << endl;
+  cout << "🌱: 100   🌻: 50" << endl;
   int numRows = 5;
   int numCols = 10;
 
@@ -189,32 +189,36 @@ int GameManager::promptPlayer() {
   if (decision1 == "N") {
     return 0;
   } else {
-    cout << "What plant do you want to buy (1/2/3):\n";
+    cout << "What plant do you want to buy (1/2):\n";
     cin >> decision2;
-    while (decision2 != 1 && decision2 != 2 && decision2 != 3) {
-      cout << "Invalid input\nWant plant do you want to buy (1/2/3):\n";
+    while (decision2 != 1 && decision2 != 2) {
+      cout << "Invalid input\nWant plant do you want to buy (1/2):\n";
       cin.clear();
       cin.ignore(100, '\n');
       cin >> decision2;
     }
-    cout << "Which row do you want to place the plant (0-4)\n";
-    cin >> decisionRow;
-    while (decisionRow > 4 || decisionRow < 0 || decisionRow % 1 != 0) {
-      cout << "Invalid input\nWhich row do you want to place the plant (0-4)\n";
-      cin.clear();
-      cin.ignore(10, '\n');
-      cin >> decisionRow;
-    }
 
-    cout << "Which column do you want to place the plant (0-9)\n";
-    cin >> decisionCol;
-    while (decisionCol > 9 || decisionRow < 0 || decisionRow % 1 != 0) {
-      cout << "Invalid input\nWhich column do you want to place the plant "
-              "(0-9)\n";
-      cin.clear();
-      cin.ignore(10, '\n');
+    do {
+      cout << "Which row do you want to place the plant (0-4)\n";
+      cin >> decisionRow;
+      while (decisionRow > 4 || decisionRow < 0 || decisionRow % 1 != 0) {
+        cout << "Invalid input\nWhich row do you want to place the plant "
+                "(0-4)\n";
+        cin.clear();
+        cin.ignore(10, '\n');
+        cin >> decisionRow;
+      }
+
+      cout << "Which column do you want to place the plant (0-9)\n";
       cin >> decisionCol;
-    }
+      while (decisionCol > 9 || decisionRow < 0 || decisionRow % 1 != 0) {
+        cout << "Invalid input\nWhich column do you want to place the plant "
+                "(0-9)\n";
+        cin.clear();
+        cin.ignore(10, '\n');
+        cin >> decisionCol;
+      }
+    } while (!isGridSpaceFree(decisionRow, decisionCol));
   }
 
   // call the addDefender function with the type of plant and
@@ -231,7 +235,7 @@ void GameManager::addDefender(int attackerType, int r, int c) {
     if (money >= 100) {
       gameDefenders.push_back(new Defender1(r, c));
       money = money - 100;
-      income = income - 25; //planting a 🌱 loses the player income
+      income = income - 25;  // planting a 🌱 loses the player income
     } else {
       cout << "Failed to purchase plant, insuficient funds\n";
     }
@@ -243,9 +247,6 @@ void GameManager::addDefender(int attackerType, int r, int c) {
     } else {
       cout << "Failed to purchase plant, insufficient funds\n";
     }
-  } else if (attackerType == 3) {
-    if (money >= 25) gameDefenders.push_back(new Defender3(r, c));
-    money = money - 25;
   } else {
     cout << "Failed to pruchase plant, insufficient funds\n";
   }
@@ -374,4 +375,16 @@ void GameManager::handleProjectileCollisions() {
       if (!projectileRemoved) ++j;
     }
   }
+}
+
+// verifies user plant location, by checking if their is already a plant there
+bool GameManager::isGridSpaceFree(int row, int col) {
+  for (int i = 0; i < gameDefenders.size(); i++) {
+    Coordinate pos = gameDefenders[i]->getPosition();
+    if (pos.row == row && pos.col == col) {
+      cout << "Grid Location Occupied, pick a different spot" << endl;
+      return false;
+    }
+  }
+  return true;
 }

@@ -9,6 +9,7 @@ Attacker3::Attacker3() {
     name = "🐤";
     speedBoost = 2;
     type = "Attacker3";
+    lowHPThreshold = 3;
 }
 
 void Attacker3::update() {

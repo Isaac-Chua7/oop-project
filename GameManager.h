@@ -33,6 +33,7 @@ class GameManager{
         void removeDeadCharacters();
         void introduction();
         void handleProjectileCollisions();
+        bool isGridSpaceFree(int row, int col);
 
 
 };

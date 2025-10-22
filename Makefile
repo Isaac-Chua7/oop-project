@@ -1,7 +1,9 @@
 CXXFLAGS = -Wall -std=c++11
 
-runProgram: GameCharacter.o GameManager.o Coordinate.o Attacker.o Attacker1.o Attacker2.o Attacker3.o Defender.o Defender1.o Defender2.o Defender3.o main.o Projectile.o
-	g++ GameCharacter.o GameManager.o Coordinate.o Attacker.o Attacker1.o Attacker2.o Attacker3.o Defender.o Defender1.o Defender2.o Defender3.o main.o Projectile.o -o runProgram
+all: runProgram runAttackerTest
+
+runProgram: GameCharacter.o GameManager.o Coordinate.o Attacker.o Attacker1.o Attacker2.o Attacker3.o Defender.o Defender1.o Defender2.o main.o Projectile.o
+	g++ $(CXXFLAGS) GameCharacter.o GameManager.o Coordinate.o Attacker.o Attacker1.o Attacker2.o Attacker3.o Defender.o Defender1.o Defender2.o main.o Projectile.o -o runProgram
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -24,9 +26,6 @@ Defender1.o: Defender1.cpp Defender1.h
 Defender2.o: Defender2.cpp Defender2.h
 	g++ -c Defender2.cpp
 
-Defender3.o: Defender3.cpp Defender3.h
-	g++ -c Defender3.cpp
-
 Attacker.o: Attacker.cpp Attacker.h
 	g++ -c Attacker.cpp
 
@@ -42,5 +41,11 @@ Attacker3.o: Attacker3.cpp Attacker3.h
 Projectile.o: Projectile.cpp Projectile.h
 	g++ -c Projectile.cpp	
 
+runAttackerTest: GameCharacter.o Coordinate.o Attacker.o Attacker1.o Attacker2.o Attacker3.o AttackerTest.o
+	g++ $(CXXFLAGS) GameCharacter.o Coordinate.o Attacker.o Attacker1.o Attacker2.o Attacker3.o AttackerTest.o -o runAttackerTest
+
+AttackerTest.o: AttackerTest.cpp
+	g++ -c AttackerTest.cpp
+
 clean:
-	rm *.o runProgram
+	rm *.o runProgram runAttackerTest
