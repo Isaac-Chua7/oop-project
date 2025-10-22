@@ -3,7 +3,7 @@
 Projectile::Projectile(int row, int col){
     position.row = row;
     position.col = col;
-    damage = 5;
+    damage = 3;
     name = "* ";
 }
 

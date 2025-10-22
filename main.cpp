@@ -2,11 +2,16 @@
 #include <fstream>
 
 int main() {
+  //begins with seeding for later random number generation
   srand(time(NULL));
+
+  //creates game manager
   GameManager gm;
 
+// runs introduction function
   gm.introduction();
 
+//input handling and checking if user is ready
   string ready = "";
 
   cout << "Are you ready to start this game? (Y/N)\n";
@@ -20,19 +25,20 @@ int main() {
     ready[0] = toupper(ready[0]);
   }
 
+//once ready starts game
   if (ready == "Y") {
     gm.clearTerminal();
     cout << "Game Starting\n";
     gm.printBoard();
   }
 
+//prompts guide the player through the course of a turn
   gm.promptPlayer();
 
+//for loop of next turns until the game is over
   while (gm.isGameOver() == false) {
     gm.nextTurn();
   }
-
-  cout << "YOU SURVIVED " << gm.getRoundNumber() << " ROUNDS\n";
 
   // Create a text file
   ofstream MyFile("Previous_Scores.txt");
@@ -42,6 +48,18 @@ int main() {
 
   // Close the file
   MyFile.close();
+
+  string endGameText;
+
+  ifstream ReadFile("Previous_Scores.txt");
+
+    while (getline (ReadFile, endGameText)) {
+    // Output the text from the file
+    cout << endGameText;
+  }
+
+  ReadFile.close();
+
 
   return 0;
 }

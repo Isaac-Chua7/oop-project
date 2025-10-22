@@ -7,7 +7,6 @@
 #include "Defender.h"
 #include "Defender1.h"
 #include "Defender2.h"
-#include "Defender3.h"
 
 GameManager::GameManager() {  // default constructor, no parameterised
                               // constructor is needed
